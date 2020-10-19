@@ -10,6 +10,6 @@ public class RequiredCourse extends Course {
 
     @Override
     public String show() {
-        return super.show() + String.format("4d", this.credit);
+        return super.show() + String.format("%4d", this.credit);
     }
 }
