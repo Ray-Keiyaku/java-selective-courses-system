@@ -11,6 +11,10 @@ public class Student extends User {
         this.className = className;
     }
 
+    public int getStudentID() {
+        return studentID;
+    }
+
     @Override
     public boolean login() {
         return true;
@@ -19,6 +23,12 @@ public class Student extends User {
     @Override
     public String show() {
         return String.format("%6d", this.studentID) + super.show() + String.format("%6s", this.className);
+    }
+
+    // TODO: 学生用户菜单
+    @Override
+    public void userMenu() {
+
     }
 
 }

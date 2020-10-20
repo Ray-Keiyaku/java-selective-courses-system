@@ -10,4 +10,10 @@ public class Admin extends User {
     public boolean login() {
         return true;
     }
+
+    // TODO: 管理员用户菜单
+    @Override
+    public void userMenu() {
+
+    }
 }

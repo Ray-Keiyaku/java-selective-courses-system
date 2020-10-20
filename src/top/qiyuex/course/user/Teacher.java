@@ -11,6 +11,10 @@ public class Teacher extends User {
         this.level = level;
     }
 
+    public int getWorkID() {
+        return workID;
+    }
+
     @Override
     public boolean login() {
         return true;
@@ -21,4 +25,9 @@ public class Teacher extends User {
         return String.format("%6d", this.workID) + super.show() + String.format("%6s", this.level);
     }
 
+    // TODO: 教师用户菜单
+    @Override
+    public void userMenu() {
+
+    }
 }

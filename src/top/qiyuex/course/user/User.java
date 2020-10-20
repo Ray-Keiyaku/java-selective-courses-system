@@ -34,6 +34,8 @@ public abstract class User {
 
     public abstract boolean login();
 
+    public abstract void userMenu();
+
     protected String getPassword() {
         return this.password;
     }
