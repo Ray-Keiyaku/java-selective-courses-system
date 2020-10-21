@@ -32,7 +32,7 @@ public abstract class User {
         this.password = passInputFirst;
     }
 
-    public abstract boolean login();
+    public abstract boolean login(String password);
 
     public abstract void userMenu();
 

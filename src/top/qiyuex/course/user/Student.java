@@ -16,8 +16,13 @@ public class Student extends User {
     }
 
     @Override
-    public boolean login() {
-        return true;
+    public boolean login(String password) {
+        if (this.getPassword().equals(password)) {
+            System.out.printf("你好，%s %s，欢迎访问本系统！", this.className, this.getName());
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override

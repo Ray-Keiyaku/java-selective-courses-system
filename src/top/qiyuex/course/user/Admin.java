@@ -6,9 +6,22 @@ public class Admin extends User {
         super(name, password);
     }
 
+    public boolean authName(String name) {
+        if (this.getName().equals(name)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     @Override
-    public boolean login() {
-        return true;
+    public boolean login(String password) {
+        if (this.getPassword().equals(password)) {
+            System.out.printf("你好，管理员 %s，欢迎访问本系统！", this.getName());
+            return true;
+        } else {
+            return false;
+        }
     }
 
     // TODO: 管理员用户菜单
