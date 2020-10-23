@@ -73,6 +73,14 @@ public class Courses {
         } while ("y".equals(choice));
     }
 
+    // TODO: 删除一节课
+    public static void delCourse() {
+    }
+
+    // TODO: 删除多节课
+    public static void delCourses() {
+    }
+
     // 格式化输出课程列表
     public static void showCourses() {
         System.out.printf("%-6s\t%-10s\t%-6s\t%-6s\t%-4s\t\n", "编号", "课程", "类型", "教师", "选课人数");

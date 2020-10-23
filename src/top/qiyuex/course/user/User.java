@@ -6,6 +6,7 @@ import java.util.Scanner;
 public abstract class User {
     private String name;
     private String password;
+    protected Scanner stdIn = new Scanner(System.in);
 
     public User() {
     }
@@ -19,16 +20,18 @@ public abstract class User {
         return String.format("%6s ", this.name);
     }
 
-    public void setPassWord() {
-        Scanner scanner = new Scanner(System.in);
+    public void resetPassword() {
+        this.password = "123456";
+    }
+
+    public void setPassword() {
         String passInputFirst, passInputTwice;
         do {
             System.out.println("请输入新密码（16位以内）：");
-            passInputFirst = scanner.next();
+            passInputFirst = stdIn.next();
             System.out.println("请再次输入密码：");
-            passInputTwice = scanner.next();
+            passInputTwice = stdIn.next();
         } while (!passInputFirst.equals(passInputTwice) || passInputFirst.length() > 16);
-        scanner.close();
         this.password = passInputFirst;
     }
 

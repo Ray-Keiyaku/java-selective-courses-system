@@ -12,13 +12,14 @@ public class Users {
     private static User currentUser = null;
     private static Scanner stdIn = new Scanner(System.in);
 
+    // TODO: 增加提示符
     public static void showAllStudent() {
         for (Student it : studentUser) {
             System.out.println(it.show());
         }
     }
 
-    private static Student findStudent(int stuID) {
+    public static Student findStudent(int stuID) {
         for (Student it : studentUser) {
             if (it.getStudentID() == stuID) {
                 return it;
@@ -30,27 +31,30 @@ public class Users {
     public static void showStudent(int stuID) {
         Student it = findStudent(stuID);
         if (it != null) {
+            System.out.printf("%6s %6s %6s\n", "学号", "姓名", "班级");
             System.out.println(it.show());
         } else {
             System.out.println("查无此学生！");
         }
     }
 
+    // TODO: 增加提示符
     public static void showAllTeacher() {
         for (Student it : studentUser) {
             System.out.println(it.show());
         }
     }
 
-    private static Teacher findTeacher(int teaID) {
+    public static Teacher findTeacher(int workID) {
         for (Teacher it : teacherUser) {
-            if (it.getWorkID() == teaID) {
+            if (it.getWorkID() == workID) {
                 return it;
             }
         }
         return null;
     }
 
+    // TODO: 增加提示符
     public static void showTeacher(int teaID) {
         Teacher it = findTeacher(teaID);
         if (it != null) {
@@ -60,7 +64,6 @@ public class Users {
         }
     }
 
-    // BUG: 输入会跳过下一次输入
     public static void loginMenu() {
         System.out.println("请选择登录用户类型：");
         System.out.printf("1.管理员\n2.学生\n3.教职工\n");
@@ -76,6 +79,7 @@ public class Users {
                 }
             };
         } while (currentUser == null);
+        currentUser.userMenu();
     }
 
     private static User adminLogin() {
