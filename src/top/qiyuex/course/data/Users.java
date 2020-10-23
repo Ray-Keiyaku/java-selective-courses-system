@@ -80,9 +80,9 @@ public class Users {
 
     private static User adminLogin() {
         System.out.println("请输入管理员用户名：");
-        String adminName = stdIn.nextLine();
+        String adminName = stdIn.next();
         System.out.println("请输入管理员密码：");
-        String adminPass = stdIn.nextLine();
+        String adminPass = stdIn.next();
         if (adminUser.authName(adminName) && adminUser.login(adminPass)) {
             return adminUser;
         } else {
@@ -95,7 +95,7 @@ public class Users {
         System.out.println("请输入学号：");
         int stuID = stdIn.nextInt();
         System.out.println("请输入密码：");
-        String stuPass = stdIn.nextLine();
+        String stuPass = stdIn.next();
         User tmp = findStudent(stuID);
         if (tmp != null) {
             if (tmp.login(stuPass)) {
@@ -114,7 +114,7 @@ public class Users {
         System.out.println("请输入工号：");
         int workID = stdIn.nextInt();
         System.out.println("请输入密码：");
-        String teaPass = stdIn.nextLine();
+        String teaPass = stdIn.next();
         User tmp = findStudent(workID);
         if (tmp != null) {
             if (tmp.login(teaPass)) {
