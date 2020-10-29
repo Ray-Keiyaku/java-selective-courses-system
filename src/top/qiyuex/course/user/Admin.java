@@ -55,7 +55,10 @@ public class Admin extends User {
             case 7 -> Users.showAllTeacher();
             case 8 -> Users.resetStuPass();
             case 9 -> Users.resetTeaPass();
-            // TODO: 完成管理员菜单功能
+            case 10 -> Users.addTeachers();
+            case 11 -> Users.addStudents();
+            case 12 -> Users.delTeacher();
+            case 13 -> Users.delStudent();
         }
 
     }

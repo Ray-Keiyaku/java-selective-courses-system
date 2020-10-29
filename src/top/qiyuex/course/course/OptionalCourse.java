@@ -4,9 +4,8 @@ public class OptionalCourse extends Course {
     // 最大选课人数
     private int maxStudentNum;
 
-    public OptionalCourse(int ID, String name, String teacherName, boolean isElective, int studentNum,
-            int maxStudentNum) {
-        super(ID, name, teacherName, isElective, studentNum);
+    public OptionalCourse(int ID, String name, int teacherID, boolean isElective, int studentNum, int maxStudentNum) {
+        super(ID, name, teacherID, isElective, studentNum);
         this.maxStudentNum = maxStudentNum;
     }
 

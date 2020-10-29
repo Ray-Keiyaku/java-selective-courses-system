@@ -8,7 +8,7 @@ public class StudentCourse {
         this.studentID = studentID;
         this.courseID = courseID;
     }
-    
+
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof StudentCourse) {
@@ -19,5 +19,12 @@ public class StudentCourse {
         }
         return false;
     }
-}
 
+    public int getStudentID() {
+        return this.studentID;
+    }
+
+    public int getCourseID() {
+        return this.courseID;
+    }
+}

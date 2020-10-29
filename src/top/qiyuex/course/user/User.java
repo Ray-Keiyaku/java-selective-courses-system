@@ -43,7 +43,7 @@ public abstract class User {
         return this.password;
     }
 
-    protected String getName() {
+    public String getName() {
         return this.name;
     }
 }

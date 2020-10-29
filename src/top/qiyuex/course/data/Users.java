@@ -13,16 +13,26 @@ public class Users {
     private static User currentUser = null;
     private static Scanner stdIn = new Scanner(System.in);
 
+    // 打印学生表头
+    public static void showStudentHeader() {
+        System.out.printf("%6s %6s %6s\n", "学号", "姓名", "班级");
+    }
+
+    // 打印教师表头
+    public static void showSTeacherHeader() {
+        System.out.printf("%6s %6s %6s\n", "工号", "姓名", "职称");
+    }
+
     // 打印所有学生
     public static void showAllStudent() {
-        System.out.printf("%6s %6s %6s\n", "学号", "姓名", "班级");
+        showStudentHeader();
         for (Student it : studentUser) {
             System.out.println(it.show());
         }
     }
 
     // 用学号寻找学生，返回对象
-    public static Student findStudent(int stuID) {
+    private static Student findStudent(int stuID) {
         for (Student it : studentUser) {
             if (it.getStudentID() == stuID) {
                 return it;
@@ -35,7 +45,19 @@ public class Users {
     public static void showStudent(int stuID) {
         Student it = findStudent(stuID);
         if (it != null) {
-            System.out.printf("%6s %6s %6s\n", "学号", "姓名", "班级");
+            showStudentHeader();
+            System.out.println(it.show());
+        } else {
+            System.out.println("查无此学生！");
+        }
+    }
+
+    public static void showStudent(int stuID, boolean header) {
+        Student it = findStudent(stuID);
+        if (it != null) {
+            if (header) {
+                showStudentHeader();
+            }
             System.out.println(it.show());
         } else {
             System.out.println("查无此学生！");
@@ -43,14 +65,14 @@ public class Users {
     }
 
     // 打印所有教师
-    // TODO: 增加提示符
     public static void showAllTeacher() {
+        showSTeacherHeader();
         for (Student it : studentUser) {
             System.out.println(it.show());
         }
     }
 
-    //用工号寻找教师，返回对象
+    // 用工号寻找教师，返回对象
     public static Teacher findTeacher(int workID) {
         for (Teacher it : teacherUser) {
             if (it.getWorkID() == workID) {
@@ -61,10 +83,10 @@ public class Users {
     }
 
     // 打印一个教师
-    // TODO: 增加提示符
     public static void showTeacher(int teaID) {
         Teacher it = findTeacher(teaID);
         if (it != null) {
+            showSTeacherHeader();
             System.out.println(it.show());
         } else {
             System.out.println("查无此教师！");
@@ -75,7 +97,7 @@ public class Users {
     public static void resetStuPass() {
         System.out.println("请输入学号：");
         int stuID = stdIn.nextInt();
-        Users.showStudent(stuID);
+        showStudent(stuID);
         User tmp = Users.findStudent(stuID);
         if (tmp != null) {
             tmp.resetPassword();
@@ -87,7 +109,7 @@ public class Users {
     public static void resetTeaPass() {
         System.out.println("请输入工号：");
         int workID = stdIn.nextInt();
-        Users.showTeacher(workID);
+        showTeacher(workID);
         User tmp = Users.findTeacher(workID);
         if (tmp != null) {
             tmp.resetPassword();
@@ -95,10 +117,113 @@ public class Users {
         }
     }
 
-    // TODO: 添加教师
-    // TODO：添加学生
-    // TODO: 删除教师
-    // TODO：删除学生
+    // 从流中读取教师信息并返回对象
+    private static Teacher createTeacher(Scanner input) {
+        int workID;
+        String name;
+        String level;
+        Teacher ele;
+        if (stdIn.equals(input)) {
+            System.out.println("请输入工号：");
+            workID = stdIn.nextInt();
+            System.out.println("请输入姓名：");
+            name = stdIn.next();
+            System.out.println("请输入职称：");
+            level = stdIn.next();
+            ele = new Teacher(name, "123456", workID, level);
+        } else {
+            workID = stdIn.nextInt();
+            name = stdIn.next();
+            level = stdIn.next();
+            ele = new Teacher(name, "123456", workID, level);
+        }
+        return ele;
+
+    }
+
+    // 添加多个教师
+    public static void addTeachers() {
+        int i = 1;
+        String choice = "n";
+        do {
+            System.out.printf("请输入第%d个教师信息\n", i++);
+            Teacher ele = createTeacher(stdIn);
+            teacherUser.add(ele);
+            System.out.println("是否继续？（y/n）");
+            choice = stdIn.next();
+        } while ("y".equals(choice));
+    }
+
+    // 从流中读取学生信息并返回对象
+    private static Student createStudent(Scanner input) {
+        int studentID;
+        String name;
+        String className;
+        Student ele;
+        if (stdIn.equals(input)) {
+            System.out.println("请输入学号：");
+            studentID = stdIn.nextInt();
+            System.out.println("请输入姓名：");
+            name = stdIn.next();
+            System.out.println("请输入班级：");
+            className = stdIn.next();
+            ele = new Student(name, "123456", studentID, className);
+        } else {
+            studentID = stdIn.nextInt();
+            name = stdIn.next();
+            className = stdIn.next();
+            ele = new Student(name, "123456", studentID, className);
+        }
+        return ele;
+
+    }
+
+    // 添加多个学生
+    public static void addStudents() {
+        int i = 1;
+        String choice = "n";
+        do {
+            System.out.printf("请输入第%d个学生信息\n", i++);
+            Student ele = createStudent(stdIn);
+            studentUser.add(ele);
+            System.out.println("是否继续？（y/n）");
+            choice = stdIn.next();
+        } while ("y".equals(choice));
+    }
+
+    // 删除多个教师
+    public static void delTeacher() {
+        String choice = "y";
+        do {
+            System.out.println("请输入工号：");
+            int workID = stdIn.nextInt();
+            Users.showTeacher(workID);
+            User tmp = Users.findTeacher(workID);
+            if (tmp != null) {
+                teacherUser.remove(tmp);
+                System.out.println("教师删除成功！");
+            }
+            System.out.println("是否继续？（y/n）");
+            choice = stdIn.next();
+        } while ("y".equals(choice));
+    }
+
+    // 删除多个学生
+    public static void delStudent() {
+        String choice = "y";
+        do {
+            System.out.println("请输入学号：");
+            int studentID = stdIn.nextInt();
+            Users.showStudent(studentID);
+            User tmp = Users.findStudent(studentID);
+            if (tmp != null) {
+                studentUser.remove(tmp);
+                System.out.println("学生删除成功！");
+            }
+            System.out.println("是否继续？（y/n）");
+            choice = stdIn.next();
+        } while ("y".equals(choice));
+    }
 
     // 登陆菜单
     public static void loginMenu() {
