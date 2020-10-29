@@ -30,9 +30,16 @@ public class Teacher extends User {
         return String.format("%6d", this.workID) + super.show() + String.format("%6s", this.level);
     }
 
-    // TODO: 教师用户菜单
     @Override
     public void userMenu() {
-
+        System.out.println("""
+                菜单：
+                1.修改登录密码
+                2.查看所授课程
+                3.查看所授课程的学生列表""");
+        int choice = stdIn.nextInt();
+        switch (choice) {
+            // TODO: 完成教师菜单功能
+        }
     }
 }

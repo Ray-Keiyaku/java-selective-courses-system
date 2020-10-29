@@ -30,10 +30,17 @@ public class Student extends User {
         return String.format("%6d", this.studentID) + super.show() + String.format("%6s", this.className);
     }
 
-    // TODO: 学生用户菜单
     @Override
     public void userMenu() {
-
+        System.out.println("""
+                菜单：
+                1.修改登录密码
+                2.查看自己所上课程
+                3.选修课选课""");
+        int choice = stdIn.nextInt();
+        switch (choice) {
+            // TODO: 完成学生菜单功能
+        }
     }
 
 }

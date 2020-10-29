@@ -1,8 +1,8 @@
 package top.qiyuex.course.course;
 
-public abstract class Course {
+public abstract class Course implements Comparable<Course> {
     // 课程ID
-    private int ID;
+    private int courseID;
     // 课程名称
     private String name;
     // 授课教师名称
@@ -12,8 +12,8 @@ public abstract class Course {
     // 学生人数
     private int studentNum;
 
-    public Course(int ID, String name, String teacherNme, boolean isElective, int studentNum) {
-        this.ID = ID;
+    public Course(int courseID, String name, String teacherNme, boolean isElective, int studentNum) {
+        this.courseID = courseID;
         this.name = name;
         this.teacherName = teacherNme;
         this.isElective = isElective;
@@ -23,12 +23,18 @@ public abstract class Course {
     public Course() {
     }
 
+    @Override
+    public int compareTo(Course o) {
+        return o.studentNum - this.studentNum;
+    }
+
     public String getTeacherName() {
         return this.teacherName;
     }
 
     public String show() {
         String type = isElective ? "选修" : "必修";
-        return String.format("%4d %10s %6s %3s %4d ", this.ID, this.name, this.teacherName, type, this.studentNum);
+        return String.format("%4d %10s %6s %3s %4d ", this.courseID, this.name, this.teacherName, type,
+                this.studentNum);
     }
 }

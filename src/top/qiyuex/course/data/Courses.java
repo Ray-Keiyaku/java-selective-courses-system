@@ -54,7 +54,7 @@ public class Courses {
     }
 
     // 手动输入，添加一节课
-    public static void addCourse() {
+    private static void addCourse() {
         Course ele = createCourse(stdIn);
         list.add(ele);
     }
@@ -63,22 +63,25 @@ public class Courses {
     public static void addCourses() {
         int i = 1;
         String choice = "n";
-        Course ele;
         do {
             System.out.printf("请输入第%d门课程信息\n", i++);
-            ele = createCourse(stdIn);
-            list.add(ele);
+            addCourse();
             System.out.println("是否继续？（y/n）");
             choice = stdIn.next();
         } while ("y".equals(choice));
     }
 
     // TODO: 删除一节课
-    public static void delCourse() {
+    private static void delCourse() {
     }
 
     // TODO: 删除多节课
     public static void delCourses() {
+        delCourse();
+    }
+
+    // TODO: 修改授课教师
+    public static void changeTeacher() {
     }
 
     // 格式化输出课程列表
@@ -98,5 +101,10 @@ public class Courses {
                 System.out.println(item.show());
             }
         }
+    }
+
+    // 按照选课人数排序
+    public static void sortByNum() {
+        list.sort(null);
     }
 }

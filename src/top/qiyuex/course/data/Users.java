@@ -12,8 +12,8 @@ public class Users {
     private static User currentUser = null;
     private static Scanner stdIn = new Scanner(System.in);
 
-    // TODO: 增加提示符
     public static void showAllStudent() {
+        System.out.printf("%6s %6s %6s\n", "学号", "姓名", "班级");
         for (Student it : studentUser) {
             System.out.println(it.show());
         }
@@ -63,6 +63,35 @@ public class Users {
             System.out.println("查无此教师！");
         }
     }
+
+    // 恢复学生初始密码（初始密码为：123456）
+    public static void resetStuPass() {
+        System.out.println("请输入学号：");
+        int stuID = stdIn.nextInt();
+        Users.showStudent(stuID);
+        User tmp = Users.findStudent(stuID);
+        if (tmp != null) {
+            tmp.resetPassword();
+            System.out.println("密码重置成功！");
+        }
+    }
+
+    // 恢复教师初始密码（初始密码为：123456）
+    public static void resetTeaPass() {
+        System.out.println("请输入工号：");
+        int workID = stdIn.nextInt();
+        Users.showTeacher(workID);
+        User tmp = Users.findTeacher(workID);
+        if (tmp != null) {
+            tmp.resetPassword();
+            System.out.println("密码重置成功！");
+        }
+    }
+
+    // TODO: 添加教师
+    // TODO：添加学生
+    // TODO: 删除教师
+    // TODO：删除学生
 
     public static void loginMenu() {
         System.out.println("请选择登录用户类型：");
