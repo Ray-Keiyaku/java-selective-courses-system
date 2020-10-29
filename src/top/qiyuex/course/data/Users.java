@@ -9,9 +9,11 @@ public class Users {
     private static Admin adminUser = new Admin("admin", "admin");
     private static List<Student> studentUser = new ArrayList<>();
     private static List<Teacher> teacherUser = new ArrayList<>();
+    // 当前用户
     private static User currentUser = null;
     private static Scanner stdIn = new Scanner(System.in);
 
+    // 打印所有学生
     public static void showAllStudent() {
         System.out.printf("%6s %6s %6s\n", "学号", "姓名", "班级");
         for (Student it : studentUser) {
@@ -19,6 +21,7 @@ public class Users {
         }
     }
 
+    // 用学号寻找学生，返回对象
     public static Student findStudent(int stuID) {
         for (Student it : studentUser) {
             if (it.getStudentID() == stuID) {
@@ -28,6 +31,7 @@ public class Users {
         return null;
     }
 
+    // 打印一个学生
     public static void showStudent(int stuID) {
         Student it = findStudent(stuID);
         if (it != null) {
@@ -38,6 +42,7 @@ public class Users {
         }
     }
 
+    // 打印所有教师
     // TODO: 增加提示符
     public static void showAllTeacher() {
         for (Student it : studentUser) {
@@ -45,6 +50,7 @@ public class Users {
         }
     }
 
+    //用工号寻找教师，返回对象
     public static Teacher findTeacher(int workID) {
         for (Teacher it : teacherUser) {
             if (it.getWorkID() == workID) {
@@ -54,6 +60,7 @@ public class Users {
         return null;
     }
 
+    // 打印一个教师
     // TODO: 增加提示符
     public static void showTeacher(int teaID) {
         Teacher it = findTeacher(teaID);
@@ -93,6 +100,7 @@ public class Users {
     // TODO: 删除教师
     // TODO：删除学生
 
+    // 登陆菜单
     public static void loginMenu() {
         System.out.println("请选择登录用户类型：");
         System.out.printf("1.管理员\n2.学生\n3.教职工\n");
@@ -111,6 +119,7 @@ public class Users {
         currentUser.userMenu();
     }
 
+    // 管理员登陆
     private static User adminLogin() {
         System.out.println("请输入管理员用户名：");
         String adminName = stdIn.next();
@@ -124,6 +133,7 @@ public class Users {
         }
     }
 
+    // 学生登陆
     private static User studentLogin() {
         System.out.println("请输入学号：");
         int stuID = stdIn.nextInt();
@@ -143,6 +153,7 @@ public class Users {
 
     }
 
+    // 教师登录
     private static User teacherLogin() {
         System.out.println("请输入工号：");
         int workID = stdIn.nextInt();

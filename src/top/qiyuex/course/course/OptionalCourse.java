@@ -1,6 +1,7 @@
 package top.qiyuex.course.course;
 
 public class OptionalCourse extends Course {
+    // 最大选课人数
     private int maxStudentNum;
 
     public OptionalCourse(int ID, String name, String teacherName, boolean isElective, int studentNum,

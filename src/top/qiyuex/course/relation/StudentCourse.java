@@ -8,4 +8,16 @@ public class StudentCourse {
         this.studentID = studentID;
         this.courseID = courseID;
     }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof StudentCourse) {
+            StudentCourse tmp = (StudentCourse) obj;
+            if (this.studentID == tmp.studentID && this.courseID == tmp.courseID) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
+
