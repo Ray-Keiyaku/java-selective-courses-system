@@ -4,6 +4,8 @@ import top.qiyuex.course.course.*;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileWriter;
 
 public class Courses {
     // 课程列表
@@ -209,5 +211,24 @@ public class Courses {
             }
         }
         return false;
+    }
+
+    // TODO: 课程文件输入
+    public static void load() {
+    }
+
+    // 课程文件输出
+    public static void save() {
+        try {
+            File course = new File("~/.selective-courses/course");
+            course.mkdirs();
+            FileWriter courseWriter = new FileWriter(course);
+            for (Course it : list) {
+                courseWriter.write(it.toString());
+            }
+            courseWriter.close();
+        } catch (Exception e) {
+            System.out.println("保存课程列表到文件时出现异常！");
+        }
     }
 }

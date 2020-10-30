@@ -4,6 +4,8 @@ import top.qiyuex.course.user.*;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileWriter;
 
 public class Users {
     // 管理员用户
@@ -298,6 +300,44 @@ public class Users {
         } else {
             System.out.println("工号不存在，请重新输入");
             return null;
+        }
+    }
+
+    // TODO: 教师文件输入
+    public static void teacherLoad() {
+    }
+
+    // 教师文件输出
+    public static void teacherSave() {
+        try {
+            File teacher = new File("~/.selective-courses/teacher");
+            teacher.mkdirs();
+            FileWriter teacherWriter = new FileWriter(teacher);
+            for (Teacher it : teacherUser) {
+                teacherWriter.write(it.toString());
+            }
+            teacherWriter.close();
+        } catch (Exception e) {
+            System.out.println("保存教师列表到文件时出现异常！");
+        }
+    }
+
+    // TODO: 学生文件输入
+    public static void studentLoad() {
+    }
+
+    // 学生文件输出
+    public static void studentSave() {
+        try {
+            File student = new File("~/.selective-courses/student");
+            student.mkdirs();
+            FileWriter studentWriter = new FileWriter(student);
+            for (Student it : studentUser) {
+                studentWriter.write(it.toString());
+            }
+            studentWriter.close();
+        } catch (Exception e) {
+            System.out.println("保存学生列表到文件时出现异常！");
         }
     }
 }

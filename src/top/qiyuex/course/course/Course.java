@@ -62,4 +62,11 @@ public abstract class Course implements Comparable<Course> {
         return String.format("%4d %10s %6s %3s %4d ", this.courseID, this.name, this.getTeacherName(), type,
                 this.studentNum);
     }
+
+    // 重写toString方法，用于数据持久化
+    @Override
+    public String toString() {
+        return String.format("%d %s %d %b %d", this.courseID, this.name, this.teacherID, this.isElective,
+                this.studentNum);
+    }
 }

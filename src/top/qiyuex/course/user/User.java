@@ -21,6 +21,12 @@ public abstract class User {
         return String.format("%6s ", this.name);
     }
 
+    // 重写toString方法，用于数据持久化
+    @Override
+    public String toString() {
+        return String.format("%s %s", this.name, this.password);
+    }
+
     // 重置用户密码
     public void resetPassword() {
         this.password = "123456";

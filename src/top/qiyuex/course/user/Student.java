@@ -36,6 +36,12 @@ public class Student extends User {
         return String.format("%6d", this.studentID) + super.show() + String.format("%6s", this.className);
     }
 
+    // 重写toString方法，用于数据持久化
+    @Override
+    public String toString() {
+        return super.toString() + String.format("%d %s", this.studentID, this.className);
+    }
+
     // 学生菜单
     @Override
     public void userMenu() {

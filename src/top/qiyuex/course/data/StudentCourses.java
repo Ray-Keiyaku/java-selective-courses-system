@@ -2,9 +2,10 @@ package top.qiyuex.course.data;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.io.File;
+import java.io.FileWriter;
 
 import top.qiyuex.course.relation.*;
-//import top.qiyuex.course.data.Courses;
 
 public class StudentCourses {
     // 选课信息列表
@@ -42,6 +43,25 @@ public class StudentCourses {
             if (it.getStudentID() == studentID) {
                 Courses.showCourse(it.getCourseID(), false);
             }
+        }
+    }
+
+    // TODO: 选课记录文件输入
+    public static void load() {
+    }
+
+    // 选课记录文件输出
+    public static void save() {
+        try {
+            File stuCourse = new File("~/.selective-courses/stuCourse");
+            stuCourse.mkdirs();
+            FileWriter stuCourseWriter = new FileWriter(stuCourse);
+            for (StudentCourse it : list) {
+                stuCourseWriter.write(it.toString());
+            }
+            stuCourseWriter.close();
+        } catch (Exception e) {
+            System.out.println("保存选课记录列表到文件时出现异常！");
         }
     }
 }

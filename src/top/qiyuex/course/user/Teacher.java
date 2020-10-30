@@ -35,6 +35,12 @@ public class Teacher extends User {
         return String.format("%6d", this.workID) + super.show() + String.format("%6s", this.level);
     }
 
+    // 重写toString方法，用于数据持久化
+    @Override
+    public String toString() {
+        return super.toString() + String.format("%d %s", this.workID, this.level);
+    }
+
     // 教师菜单
     @Override
     public void userMenu() {

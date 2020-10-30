@@ -30,4 +30,10 @@ public class StudentCourse {
     public int getCourseID() {
         return this.courseID;
     }
+
+    // 重写toString方法，用于数据持久化
+    @Override
+    public String toString() {
+        return String.format("%d %d", this.studentID, this.courseID);
+    }
 }
