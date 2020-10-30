@@ -6,8 +6,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Users {
+    // 管理员用户
     private static Admin adminUser = new Admin("admin", "admin");
+    // 学生用户列表
     private static List<Student> studentUser = new ArrayList<>();
+    // 教师用户列表
     private static List<Teacher> teacherUser = new ArrayList<>();
     // 当前用户
     private static User currentUser = null;
@@ -68,7 +71,7 @@ public class Users {
     // 打印所有教师
     public static void showAllTeacher() {
         showSTeacherHeader();
-        for (Student it : studentUser) {
+        for (Teacher it : teacherUser) {
             System.out.println(it.show());
         }
     }
@@ -228,9 +231,9 @@ public class Users {
 
     // 登陆菜单
     public static void loginMenu() {
-        System.out.println("请选择登录用户类型：");
-        System.out.printf("1.管理员\n2.学生\n3.教职工\n");
         do {
+            System.out.println("请选择登录用户类型：");
+            System.out.printf("1.管理员\n2.学生\n3.教职工\n");
             int choice = stdIn.nextInt();
             currentUser = switch (choice) {
                 case 1 -> adminLogin();

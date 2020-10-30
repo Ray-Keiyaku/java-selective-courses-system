@@ -13,10 +13,12 @@ public class Teacher extends User {
         this.level = level;
     }
 
+    // 返回教师工号
     public int getWorkID() {
         return workID;
     }
 
+    // 教师登录
     @Override
     public boolean login(String password) {
         if (this.getPassword().equals(password)) {
@@ -27,11 +29,13 @@ public class Teacher extends User {
         }
     }
 
+    // 返回格式化的教师信息，用于在终端输出
     @Override
     public String show() {
         return String.format("%6d", this.workID) + super.show() + String.format("%6s", this.level);
     }
 
+    // 教师菜单
     @Override
     public void userMenu() {
         System.out.println("""

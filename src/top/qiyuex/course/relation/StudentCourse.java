@@ -9,6 +9,7 @@ public class StudentCourse {
         this.courseID = courseID;
     }
 
+    // 重写equals方法，用于判断选课信息是否存在
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof StudentCourse) {
@@ -20,10 +21,12 @@ public class StudentCourse {
         return false;
     }
 
+    // 返回该选课记录的学生学号
     public int getStudentID() {
         return this.studentID;
     }
 
+    // 返回该选课记录的课程ID
     public int getCourseID() {
         return this.courseID;
     }

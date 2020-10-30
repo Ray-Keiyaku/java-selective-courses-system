@@ -7,6 +7,7 @@ import top.qiyuex.course.relation.*;
 //import top.qiyuex.course.data.Courses;
 
 public class StudentCourses {
+    // 选课信息列表
     private static List<StudentCourse> list = new ArrayList<>();
 
     // 选课

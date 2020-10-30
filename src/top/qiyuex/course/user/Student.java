@@ -14,10 +14,12 @@ public class Student extends User {
         this.className = className;
     }
 
+    // 返回学生学号
     public int getStudentID() {
         return studentID;
     }
 
+    // 学生登录
     @Override
     public boolean login(String password) {
         if (this.getPassword().equals(password)) {
@@ -28,11 +30,13 @@ public class Student extends User {
         }
     }
 
+    // 返回格式化的学生信息，用于在终端输出
     @Override
     public String show() {
         return String.format("%6d", this.studentID) + super.show() + String.format("%6s", this.className);
     }
 
+    // 学生菜单
     @Override
     public void userMenu() {
         System.out.println("""
