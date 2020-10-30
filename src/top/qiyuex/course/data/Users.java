@@ -176,7 +176,6 @@ public class Users {
             System.out.println("请输入班级：");
             className = input.next();
             ele = new Student(name, "123456", studentID, className);
-            Courses.selectAllRequiredCourse(studentID);
         } else {
             name = input.next();
             String pass = input.next();
@@ -196,6 +195,7 @@ public class Users {
             System.out.printf("请输入第%d个学生信息\n", i++);
             Student ele = createStudent(stdIn);
             studentUser.add(ele);
+            Courses.selectAllRequiredCourse(ele.getStudentID());
             System.out.println("是否继续？（y/n）");
             choice = stdIn.next();
         } while ("y".equals(choice));
@@ -325,7 +325,7 @@ public class Users {
             File teacher = new File(usrHome + "/.selective-courses/teacher.txt");
             if (teacher.exists()) {
                 Scanner fileIn = new Scanner(teacher);
-                while (fileIn.hasNextLine()) {
+                while (fileIn.hasNext()) {
                     Teacher tmp = createTeacher(fileIn);
                     teacherUser.add(tmp);
                 }
@@ -361,7 +361,7 @@ public class Users {
             File student = new File(usrHome + "/.selective-courses/student.txt");
             if (student.exists()) {
                 Scanner fileIn = new Scanner(student);
-                while (fileIn.hasNextLine()) {
+                while (fileIn.hasNext()) {
                     Student tmp = createStudent(fileIn);
                     studentUser.add(tmp);
                 }

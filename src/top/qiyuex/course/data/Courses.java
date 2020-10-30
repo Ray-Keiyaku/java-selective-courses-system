@@ -39,7 +39,6 @@ public class Courses {
                 System.out.println("请输入学分：");
                 credit = input.nextInt();
                 ele = new RequiredCourse(ID, name, teacherID, isElective, studentNum, credit);
-                Users.allSelectRequiredCourse(ID);
             }
         } else {
             // 从其他流输入
@@ -63,6 +62,9 @@ public class Courses {
     private static void addCourse() {
         Course ele = createCourse(stdIn);
         list.add(ele);
+        if (ele instanceof RequiredCourse) {
+            Users.allSelectRequiredCourse(ele.getCourseID());
+        }
     }
 
     // 手动输入，添加多节课
@@ -116,7 +118,7 @@ public class Courses {
 
     // 打印课程表头
     public static void showCourseHeader() {
-        System.out.printf("%4s %10s %6s %3s %4s %4s", "编号", "课程", "教师", "类型", "选课人数", "学分/最大人数");
+        System.out.printf("%4s %10s %6s %3s %4s %4s\n", "编号", "课程", "教师", "类型", "选课人数", "学分/最大人数");
     }
 
     // 打印一节课
@@ -147,7 +149,7 @@ public class Courses {
     public static void showCourses() {
         showCourseHeader();
         for (Course it : list) {
-            it.show();
+            System.out.println(it.show());
         }
     }
 
@@ -173,9 +175,10 @@ public class Courses {
 
     // 用教师姓名查找所授课信息并打印学生列表
     public static void showCourseStusByTeacher(int workID) {
-        Users.showStudentHeader();
         for (Course it : list) {
             if (it.getTeacherID() == workID) {
+                showCourseHeader();
+                System.out.println(it.show());
                 StudentCourses.showCourseStus(it.getCourseID());
             }
         }
@@ -211,8 +214,10 @@ public class Courses {
     // 为学生添加所有必修课
     public static void selectAllRequiredCourse(int studentID) {
         for (Course it : list) {
-            StudentCourses.selectRequiredCourse(studentID, it.getCourseID());
-            it.addStudentNum();
+            if (it instanceof RequiredCourse) {
+                StudentCourses.selectRequiredCourse(studentID, it.getCourseID());
+                it.addStudentNum();
+            }
         }
     }
 
@@ -234,7 +239,7 @@ public class Courses {
             File course = new File(usrHome + "/.selective-courses/course.txt");
             if (course.exists()) {
                 Scanner fileIn = new Scanner(course);
-                while (fileIn.hasNextLine()) {
+                while (fileIn.hasNext()) {
                     Course tmp = createCourse(fileIn);
                     list.add(tmp);
                 }

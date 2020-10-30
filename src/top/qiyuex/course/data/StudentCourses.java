@@ -63,7 +63,7 @@ public class StudentCourses {
             File stuCourse = new File(usrHome + "/.selective-courses/stuCourse.txt");
             if (stuCourse.exists()) {
                 Scanner fileIn = new Scanner(stuCourse);
-                while (fileIn.hasNextLine()) {
+                while (fileIn.hasNext()) {
                     int studentID = fileIn.nextInt();
                     int courseID = fileIn.nextInt();
                     list.add(new StudentCourse(studentID, courseID));
