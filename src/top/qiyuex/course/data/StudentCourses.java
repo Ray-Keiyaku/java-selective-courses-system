@@ -2,6 +2,7 @@ package top.qiyuex.course.data;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import java.io.File;
 import java.io.FileWriter;
 
@@ -46,18 +47,32 @@ public class StudentCourses {
         }
     }
 
-    // TODO: 选课记录文件输入
+    // 选课记录文件输入
     public static void load() {
+        try {
+            String usrHome = System.getProperty("user.home");
+            File stuCourse = new File(usrHome + "/.selective-courses/stuCourse.txt");
+            Scanner fileIn = new Scanner(stuCourse);
+            while (fileIn.hasNextLine()) {
+                int studentID = fileIn.nextInt();
+                int courseID = fileIn.nextInt();
+                list.add(new StudentCourse(studentID, courseID));
+            }
+            fileIn.close();
+        } catch (Exception e) {
+            System.out.println("从文件读取选课记录列表时出现异常！" + e);
+        }
     }
 
     // 选课记录文件输出
     public static void save() {
         try {
-            File stuCourse = new File("~/.selective-courses/stuCourse");
+            String usrHome = System.getProperty("user.home");
+            File stuCourse = new File(usrHome + "/.selective-courses/stuCourse.txt");
             stuCourse.mkdirs();
             FileWriter stuCourseWriter = new FileWriter(stuCourse);
             for (StudentCourse it : list) {
-                stuCourseWriter.write(it.toString());
+                stuCourseWriter.write(it.toString() + "\n");
             }
             stuCourseWriter.close();
         } catch (Exception e) {

@@ -131,17 +131,18 @@ public class Users {
         Teacher ele;
         if (stdIn.equals(input)) {
             System.out.println("请输入工号：");
-            workID = stdIn.nextInt();
+            workID = input.nextInt();
             System.out.println("请输入姓名：");
-            name = stdIn.next();
+            name = input.next();
             System.out.println("请输入职称：");
-            level = stdIn.next();
+            level = input.next();
             ele = new Teacher(name, "123456", workID, level);
         } else {
-            workID = stdIn.nextInt();
-            name = stdIn.next();
-            level = stdIn.next();
-            ele = new Teacher(name, "123456", workID, level);
+            name = input.next();
+            String pass = input.next();
+            workID = input.nextInt();
+            level = input.next();
+            ele = new Teacher(name, pass, workID, level);
         }
         return ele;
 
@@ -158,6 +159,7 @@ public class Users {
             System.out.println("是否继续？（y/n）");
             choice = stdIn.next();
         } while ("y".equals(choice));
+        teacherSave();
     }
 
     // 从流中读取学生信息并返回对象
@@ -168,17 +170,18 @@ public class Users {
         Student ele;
         if (stdIn.equals(input)) {
             System.out.println("请输入学号：");
-            studentID = stdIn.nextInt();
+            studentID = input.nextInt();
             System.out.println("请输入姓名：");
-            name = stdIn.next();
+            name = input.next();
             System.out.println("请输入班级：");
-            className = stdIn.next();
+            className = input.next();
             ele = new Student(name, "123456", studentID, className);
         } else {
-            studentID = stdIn.nextInt();
-            name = stdIn.next();
-            className = stdIn.next();
-            ele = new Student(name, "123456", studentID, className);
+            name = input.next();
+            String pass = input.next();
+            studentID = input.nextInt();
+            className = input.next();
+            ele = new Student(name, pass, studentID, className);
         }
         return ele;
 
@@ -303,18 +306,33 @@ public class Users {
         }
     }
 
-    // TODO: 教师文件输入
+    // 教师文件输入
     public static void teacherLoad() {
+        try {
+            String usrHome = System.getProperty("user.home");
+            File teacher = new File(usrHome + "/.selective-courses/teacher.txt");
+            Scanner fileIn = new Scanner(teacher);
+            while (fileIn.hasNextLine()) {
+                Teacher tmp = createTeacher(fileIn);
+                teacherUser.add(tmp);
+            }
+
+        } catch (Exception e) {
+            System.out.println("从文件读取教师列表时出现异常！" + e);
+        }
     }
 
     // 教师文件输出
     public static void teacherSave() {
         try {
-            File teacher = new File("~/.selective-courses/teacher");
-            teacher.mkdirs();
+            String usrHome = System.getProperty("user.home");
+            File teacher = new File(usrHome + "/.selective-courses/teacher.txt");
+            if (!teacher.exists()) {
+                teacher.createNewFile();
+            }
             FileWriter teacherWriter = new FileWriter(teacher);
             for (Teacher it : teacherUser) {
-                teacherWriter.write(it.toString());
+                teacherWriter.write(it.toString() + "\n");
             }
             teacherWriter.close();
         } catch (Exception e) {
@@ -322,18 +340,30 @@ public class Users {
         }
     }
 
-    // TODO: 学生文件输入
+    // 学生文件输入
     public static void studentLoad() {
+        try {
+            String usrHome = System.getProperty("user.home");
+            File student = new File(usrHome + "/.selective-courses/student.txt");
+            Scanner fileIn = new Scanner(student);
+            while (fileIn.hasNextLine()) {
+                Student tmp = createStudent(fileIn);
+                studentUser.add(tmp);
+            }
+
+        } catch (Exception e) {
+            System.out.println("从文件读取学生列表时出现异常！" + e);
+        }
     }
 
     // 学生文件输出
     public static void studentSave() {
         try {
-            File student = new File("~/.selective-courses/student");
+            File student = new File("~/.selective-courses/student.txt");
             student.mkdirs();
             FileWriter studentWriter = new FileWriter(student);
             for (Student it : studentUser) {
-                studentWriter.write(it.toString());
+                studentWriter.write(it.toString() + "\n");
             }
             studentWriter.close();
         } catch (Exception e) {

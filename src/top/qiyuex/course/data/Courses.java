@@ -41,9 +41,10 @@ public class Courses {
             }
         } else {
             // 从其他流输入
+            ID = input.nextInt();
             name = input.next();
-            isElective = input.nextBoolean();
             teacherID = input.nextInt();
+            isElective = input.nextBoolean();
             studentNum = input.nextInt();
             if (isElective) {
                 maxStudentNum = input.nextInt();
@@ -213,18 +214,31 @@ public class Courses {
         return false;
     }
 
-    // TODO: 课程文件输入
+    // 课程文件输入
     public static void load() {
+        try {
+            String usrHome = System.getProperty("user.home");
+            File course = new File(usrHome + "/.selective-courses/course.txt");
+            Scanner fileIn = new Scanner(course);
+            while (fileIn.hasNextLine()) {
+                Course tmp = createCourse(fileIn);
+                list.add(tmp);
+            }
+            fileIn.close();
+        } catch (Exception e) {
+            System.out.println("从文件读取课程列表时出现异常！" + e);
+        }
     }
 
     // 课程文件输出
     public static void save() {
         try {
-            File course = new File("~/.selective-courses/course");
+            String usrHome = System.getProperty("user.home");
+            File course = new File(usrHome + "/.selective-courses/course.txt");
             course.mkdirs();
             FileWriter courseWriter = new FileWriter(course);
             for (Course it : list) {
-                courseWriter.write(it.toString());
+                courseWriter.write(it.toString() + "\n");
             }
             courseWriter.close();
         } catch (Exception e) {
