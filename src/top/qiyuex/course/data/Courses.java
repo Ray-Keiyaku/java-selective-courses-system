@@ -73,6 +73,7 @@ public class Courses {
             System.out.println("是否继续？（y/n）");
             choice = stdIn.next();
         } while ("y".equals(choice));
+        save();
     }
 
     // 删除一节课
@@ -92,6 +93,7 @@ public class Courses {
             System.out.println("是否继续？（y/n）");
             choice = stdIn.next();
         } while ("y".equals(choice));
+        save();
     }
 
     // 修改授课教师
@@ -107,6 +109,7 @@ public class Courses {
             ;
             System.out.println("教师修改成功！");
         }
+        save();
     }
 
     // 打印课程表头

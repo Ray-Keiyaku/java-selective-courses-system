@@ -24,6 +24,7 @@ public class StudentCourses {
         } else {
             list.add(tmp);
             System.out.println("选课成功！");
+            save();
         }
     }
 

@@ -1,6 +1,7 @@
 package top.qiyuex.course.user;
 
 import top.qiyuex.course.data.StudentCourses;
+import top.qiyuex.course.data.Users;
 import top.qiyuex.course.data.Courses;
 
 // 学生实体类
@@ -54,7 +55,10 @@ public class Student extends User {
                     4.退出系统""");
             int choice = stdIn.nextInt();
             switch (choice) {
-                case 1 -> this.setPassword();
+                case 1 -> {
+                    this.setPassword();
+                    Users.studentSave();
+                }
                 case 2 -> StudentCourses.showStuCourses(this.studentID);
                 case 3 -> {
                     Courses.showOptionalCourses();

@@ -1,6 +1,7 @@
 package top.qiyuex.course.user;
 
 import top.qiyuex.course.data.Courses;
+import top.qiyuex.course.data.Users;
 
 // 教师实体类
 public class Teacher extends User {
@@ -53,7 +54,10 @@ public class Teacher extends User {
                     4.退出系统""");
             int choice = stdIn.nextInt();
             switch (choice) {
-                case 1 -> this.setPassword();
+                case 1 -> {
+                    this.setPassword();
+                    Users.teacherSave();
+                }
                 case 2 -> Courses.showCourseByTeacher(this.workID);
                 case 3 -> Courses.showCourseStusByTeacher(this.workID);
                 case 4 -> {

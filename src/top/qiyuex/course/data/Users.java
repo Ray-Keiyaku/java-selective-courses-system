@@ -198,6 +198,7 @@ public class Users {
             System.out.println("是否继续？（y/n）");
             choice = stdIn.next();
         } while ("y".equals(choice));
+        studentSave();
     }
 
     // 删除多个教师
@@ -215,6 +216,7 @@ public class Users {
             System.out.println("是否继续？（y/n）");
             choice = stdIn.next();
         } while ("y".equals(choice));
+        teacherSave();
     }
 
     // 删除多个学生
@@ -232,6 +234,7 @@ public class Users {
             System.out.println("是否继续？（y/n）");
             choice = stdIn.next();
         } while ("y".equals(choice));
+        studentSave();
     }
 
     // 登陆菜单
@@ -293,7 +296,7 @@ public class Users {
         int workID = stdIn.nextInt();
         System.out.println("请输入密码：");
         String teaPass = stdIn.next();
-        User tmp = findStudent(workID);
+        User tmp = findTeacher(workID);
         if (tmp != null) {
             if (tmp.login(teaPass)) {
                 return tmp;
