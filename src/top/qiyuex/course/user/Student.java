@@ -39,20 +39,27 @@ public class Student extends User {
     // 学生菜单
     @Override
     public void userMenu() {
-        System.out.println("""
-                菜单：
-                1.修改登录密码
-                2.查看自己所上课程
-                3.选修课选课""");
-        int choice = stdIn.nextInt();
-        switch (choice) {
-            case 1 -> this.setPassword();
-            case 2 -> StudentCourses.showStuCourses(this.studentID);
-            case 3 -> {
-                Courses.showOptionalCourses();
-                System.out.println("请输入要选择的课程编号：");
-                int courseID = stdIn.nextInt();
-                StudentCourses.selectCourse(this.studentID, courseID);
+        while (true) {
+            System.out.println("""
+                    菜单：
+                    1.修改登录密码
+                    2.查看自己所上课程
+                    3.选修课选课
+                    4.退出系统""");
+            int choice = stdIn.nextInt();
+            switch (choice) {
+                case 1 -> this.setPassword();
+                case 2 -> StudentCourses.showStuCourses(this.studentID);
+                case 3 -> {
+                    Courses.showOptionalCourses();
+                    System.out.println("请输入要选择的课程编号：");
+                    int courseID = stdIn.nextInt();
+                    StudentCourses.selectCourse(this.studentID, courseID);
+                }
+                case 4 -> {
+                    return;
+                }
+                default -> System.out.println("输入错误，请重新输入！");
             }
         }
     }

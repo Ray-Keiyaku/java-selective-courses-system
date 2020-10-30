@@ -38,16 +38,23 @@ public class Teacher extends User {
     // 教师菜单
     @Override
     public void userMenu() {
-        System.out.println("""
-                菜单：
-                1.修改登录密码
-                2.查看所授课程
-                3.查看所授课程的学生列表""");
-        int choice = stdIn.nextInt();
-        switch (choice) {
-            case 1 -> this.setPassword();
-            case 2 -> Courses.showCourseByTeacher(this.workID);
-            case 3 -> Courses.showCourseStusByTeacher(this.workID);
+        while (true) {
+            System.out.println("""
+                    菜单：
+                    1.修改登录密码
+                    2.查看所授课程
+                    3.查看所授课程的学生列表
+                    4.退出系统""");
+            int choice = stdIn.nextInt();
+            switch (choice) {
+                case 1 -> this.setPassword();
+                case 2 -> Courses.showCourseByTeacher(this.workID);
+                case 3 -> Courses.showCourseStusByTeacher(this.workID);
+                case 4 -> {
+                    return;
+                }
+                default -> System.out.println("输入错误，请重新输入！");
+            }
         }
     }
 }
