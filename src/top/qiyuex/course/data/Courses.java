@@ -14,22 +14,23 @@ public class Courses {
 
     // 从流中读取课程信息并返回对象
     private static Course createCourse(Scanner input) {
-        int ID = list.size() + 1;
+        int ID;
         String name;
         int teacherID;
         boolean isElective;
-        int studentNum = 0, maxStudentNum, credit;
+        int studentNum = 0;
+        int maxStudentNum, credit;
         Course ele;
         // 从标准输入流输入
         if (stdIn.equals(input)) {
+            System.out.println("请输入课程编号：");
+            ID = input.nextInt();
             System.out.println("请输入课程名：");
             name = input.next();
             System.out.println("请输入任课教师工号：");
             teacherID = input.nextInt();
             System.out.println("请输入课程是否为选修（true/false）：");
             isElective = input.nextBoolean();
-            System.out.println("请输入当前选课人数：");
-            studentNum = input.nextInt();
             if (isElective) {
                 System.out.println("请输入最大选课人数：");
                 maxStudentNum = input.nextInt();
@@ -38,6 +39,7 @@ public class Courses {
                 System.out.println("请输入学分：");
                 credit = input.nextInt();
                 ele = new RequiredCourse(ID, name, teacherID, isElective, studentNum, credit);
+                Users.allSelectRequiredCourse(ID);
             }
         } else {
             // 从其他流输入
@@ -185,7 +187,7 @@ public class Courses {
     }
 
     // 用课程ID寻找课程，返回对象
-    private static Course findCourse(int courseID) {
+    public static Course findCourse(int courseID) {
         for (Course it : list) {
             if (it.getCourseID() == courseID) {
                 return it;
@@ -204,6 +206,14 @@ public class Courses {
             }
         }
         return false;
+    }
+
+    // 为学生添加所有必修课
+    public static void selectAllRequiredCourse(int studentID) {
+        for (Course it : list) {
+            StudentCourses.selectRequiredCourse(studentID, it.getCourseID());
+            it.addStudentNum();
+        }
     }
 
     // 判断该课程是否为选修课

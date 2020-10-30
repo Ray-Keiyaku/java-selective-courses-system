@@ -12,9 +12,9 @@ public class StudentCourses {
     // 选课信息列表
     private static List<StudentCourse> list = new ArrayList<>();
 
-    // 选课
-    public static void selectCourse(int studentID, int courseID) {
-        var tmp = new StudentCourse(studentID, courseID);
+    // 选课(选修课)
+    public static void selectOptionalCourse(int studentID, int courseID) {
+        StudentCourse tmp = new StudentCourse(studentID, courseID);
         if (!Courses.isOptionalCourse(courseID)) {
             System.out.println("该课程编号输入不存在或不是选修课！");
         } else if (list.contains(tmp)) {
@@ -23,9 +23,17 @@ public class StudentCourses {
             System.out.println("该课程人数已满！");
         } else {
             list.add(tmp);
+            Courses.findCourse(courseID).addStudentNum();
             System.out.println("选课成功！");
             save();
         }
+    }
+
+    // 选课(必修课)
+    public static void selectRequiredCourse(int studentID, int courseID) {
+        StudentCourse tmp = new StudentCourse(studentID, courseID);
+        list.add(tmp);
+        save();
     }
 
     // 打印该课程的学生列表

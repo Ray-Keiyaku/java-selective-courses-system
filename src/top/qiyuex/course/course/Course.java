@@ -56,6 +56,16 @@ public abstract class Course implements Comparable<Course> {
         this.teacherID = teacherID;
     }
 
+    // 当前课程学生人数+1
+    public void addStudentNum() {
+        this.studentNum++;
+    }
+
+    // 当前课程学生人数=n
+    public void addStudentNum(int n) {
+        this.studentNum = n;
+    }
+
     // 返回格式化的课程信息，用于在终端输出
     public String show() {
         String type = isElective ? "选修" : "必修";

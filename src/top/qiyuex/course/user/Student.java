@@ -64,7 +64,7 @@ public class Student extends User {
                     Courses.showOptionalCourses();
                     System.out.println("请输入要选择的课程编号：");
                     int courseID = stdIn.nextInt();
-                    StudentCourses.selectCourse(this.studentID, courseID);
+                    StudentCourses.selectOptionalCourse(this.studentID, courseID);
                 }
                 case 4 -> {
                     return;

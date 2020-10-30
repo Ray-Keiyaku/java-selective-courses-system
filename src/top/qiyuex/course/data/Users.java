@@ -176,6 +176,7 @@ public class Users {
             System.out.println("请输入班级：");
             className = input.next();
             ele = new Student(name, "123456", studentID, className);
+            Courses.selectAllRequiredCourse(studentID);
         } else {
             name = input.next();
             String pass = input.next();
@@ -254,6 +255,14 @@ public class Users {
             };
         } while (currentUser == null);
         currentUser.userMenu();
+    }
+
+    // 为所有学生添加必修课
+    public static void allSelectRequiredCourse(int courseID) {
+        Courses.findCourse(courseID).addStudentNum(studentUser.size());
+        for (Student it : studentUser) {
+            StudentCourses.selectRequiredCourse(it.getStudentID(), courseID);
+        }
     }
 
     // 管理员登陆
