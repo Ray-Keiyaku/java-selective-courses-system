@@ -18,7 +18,7 @@ public class OptionalCourse extends Course {
     // 重写toString方法，用于数据持久化
     @Override
     public String toString() {
-        return super.toString() + String.format(" %d", this.maxStudentNum);
+        return super.toString() + String.format("%d", this.maxStudentNum);
     }
 
     // 判断当前人数是否超过最大选课人数，返回是否可以进行选课

@@ -24,7 +24,7 @@ public abstract class User {
     // 重写toString方法，用于数据持久化
     @Override
     public String toString() {
-        return String.format("%s %s", this.name, this.password);
+        return String.format("%s %s ", this.name, this.password);
     }
 
     // 重置用户密码

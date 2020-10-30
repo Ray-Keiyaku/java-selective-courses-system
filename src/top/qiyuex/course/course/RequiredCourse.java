@@ -18,6 +18,6 @@ public class RequiredCourse extends Course {
     // 重写toString方法，用于数据持久化
     @Override
     public String toString() {
-        return super.toString() + String.format(" %d", this.credit);
+        return super.toString() + String.format("%d", this.credit);
     }
 }
