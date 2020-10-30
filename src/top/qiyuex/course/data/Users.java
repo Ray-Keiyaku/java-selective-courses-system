@@ -52,6 +52,7 @@ public class Users {
         }
     }
 
+    // 打印一个学生，header为false时不输出表头
     public static void showStudent(int stuID, boolean header) {
         Student it = findStudent(stuID);
         if (it != null) {

@@ -1,5 +1,7 @@
 package top.qiyuex.course.user;
 
+import top.qiyuex.course.data.Courses;
+
 // 教师实体类
 public class Teacher extends User {
     private int workID;
@@ -39,7 +41,9 @@ public class Teacher extends User {
                 3.查看所授课程的学生列表""");
         int choice = stdIn.nextInt();
         switch (choice) {
-            // TODO: 完成教师菜单功能
+            case 1 -> this.setPassword();
+            case 2 -> Courses.showCourseByTeacher(this.workID);
+            case 3 -> Courses.showCourseStusByTeacher(this.workID);
         }
     }
 }

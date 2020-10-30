@@ -42,6 +42,10 @@ public abstract class Course implements Comparable<Course> {
         return this.courseID;
     }
 
+    public int getStudentNum() {
+        return this.studentNum;
+    }
+
     public void changeTeacher(int teacherID) {
         this.teacherID = teacherID;
     }

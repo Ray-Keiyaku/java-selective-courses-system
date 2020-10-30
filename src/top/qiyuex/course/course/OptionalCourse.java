@@ -14,4 +14,12 @@ public class OptionalCourse extends Course {
         return super.show() + String.format("%4d", this.maxStudentNum);
     }
 
+    public boolean canSelect() {
+        if (this.getStudentNum() < this.maxStudentNum) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }

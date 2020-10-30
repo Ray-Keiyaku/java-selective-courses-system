@@ -106,33 +106,69 @@ public class Courses {
         }
     }
 
-    // 输出一节课
+    // 打印课程表头
+    public static void showCourseHeader() {
+        System.out.printf("%4s %10s %6s %3s %4s %4s", "编号", "课程", "教师", "类型", "选课人数", "学分/最大人数");
+    }
+
+    // 打印一节课
     public static void showCourse(int courseID) {
         Course tmp = findCourse(courseID);
         if (tmp != null) {
-            System.out.printf("%-6s\t%-10s\t%-6s\t%-6s\t%-4s\t\n", "编号", "课程", "类型", "教师", "选课人数");
+            showCourseHeader();
             System.out.println(tmp.show());
         } else {
             System.out.println("查无此课程！");
         }
     }
 
-    // 格式化输出课程列表
-    public static void showCourses() {
-        System.out.printf("%-6s\t%-10s\t%-6s\t%-6s\t%-4s\t\n", "编号", "课程", "类型", "教师", "选课人数");
-        for (Course item : list) {
-            item.show();
+    // 打印一节课，header为false时不输出表头
+    public static void showCourse(int courseID, boolean header) {
+        Course tmp = findCourse(courseID);
+        if (tmp != null) {
+            if (header) {
+                showCourseHeader();
+            }
+            System.out.println(tmp.show());
+        } else {
+            System.out.println("查无此课程！");
         }
     }
 
-    // 用教师姓名查找所授课信息
-    public static void searchCourseByTeacher() {
-        System.out.println("请输入需要查找的教师名称：");
-        String name = stdIn.next();
-        System.out.printf("%-6s\t%-10s\t%-6s\t%-6s\t%-4s\t\n", "编号", "课程", "类型", "教师", "选课人数");
-        for (Course item : list) {
-            if (item.getTeacherName().equals(name)) {
-                System.out.println(item.show());
+    // 打印所有课程列表
+    public static void showCourses() {
+        showCourseHeader();
+        for (Course it : list) {
+            it.show();
+        }
+    }
+
+    // 打印选修课程列表
+    public static void showOptionalCourses() {
+        showCourseHeader();
+        for (Course it : list) {
+            if (it instanceof OptionalCourse) {
+                System.out.println(it.show());
+            }
+        }
+    }
+
+    // 用教师姓名查找所授课信息并打印
+    public static void showCourseByTeacher(int workID) {
+        showCourseHeader();
+        for (Course it : list) {
+            if (it.getTeacherID() == workID) {
+                System.out.println(it.show());
+            }
+        }
+    }
+
+    // 用教师姓名查找所授课信息并打印学生列表
+    public static void showCourseStusByTeacher(int workID) {
+        Users.showStudentHeader();
+        for (Course it : list) {
+            if (it.getTeacherID() == workID) {
+                StudentCourses.showCourseStus(it.getCourseID());
             }
         }
     }
@@ -150,5 +186,28 @@ public class Courses {
             }
         }
         return null;
+    }
+
+    // 判断该课程是否可以选修
+    public static boolean canSelectCourse(int courseID) {
+        Course tmp = findCourse(courseID);
+        if (tmp != null) {
+            if (tmp instanceof OptionalCourse) {
+                OptionalCourse tmp2 = (OptionalCourse) tmp;
+                return tmp2.canSelect();
+            }
+        }
+        return false;
+    }
+
+    // 判断该课程是否为选修课
+    public static boolean isOptionalCourse(int courseID) {
+        Course tmp = findCourse(courseID);
+        if (tmp != null) {
+            if (tmp instanceof OptionalCourse) {
+                return true;
+            }
+        }
+        return false;
     }
 }

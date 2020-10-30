@@ -1,5 +1,8 @@
 package top.qiyuex.course.user;
 
+import top.qiyuex.course.data.StudentCourses;
+import top.qiyuex.course.data.Courses;
+
 // 学生实体类
 public class Student extends User {
     private int studentID;
@@ -39,7 +42,14 @@ public class Student extends User {
                 3.选修课选课""");
         int choice = stdIn.nextInt();
         switch (choice) {
-            // TODO: 完成学生菜单功能
+            case 1 -> this.setPassword();
+            case 2 -> StudentCourses.showStuCourses(this.studentID);
+            case 3 -> {
+                Courses.showOptionalCourses();
+                System.out.println("请输入要选择的课程编号：");
+                int courseID = stdIn.nextInt();
+                StudentCourses.selectCourse(this.studentID, courseID);
+            }
         }
     }
 
