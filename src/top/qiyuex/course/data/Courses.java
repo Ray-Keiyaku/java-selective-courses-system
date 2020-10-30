@@ -235,7 +235,10 @@ public class Courses {
         try {
             String usrHome = System.getProperty("user.home");
             File course = new File(usrHome + "/.selective-courses/course.txt");
-            course.mkdirs();
+            if (!course.exists()) {
+                course.getParentFile().mkdirs();
+                course.createNewFile();
+            }
             FileWriter courseWriter = new FileWriter(course);
             for (Course it : list) {
                 courseWriter.write(it.toString() + "\n");

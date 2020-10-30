@@ -69,7 +69,10 @@ public class StudentCourses {
         try {
             String usrHome = System.getProperty("user.home");
             File stuCourse = new File(usrHome + "/.selective-courses/stuCourse.txt");
-            stuCourse.mkdirs();
+            if (!stuCourse.exists()) {
+                stuCourse.getParentFile().mkdirs();
+                stuCourse.createNewFile();
+            }
             FileWriter stuCourseWriter = new FileWriter(stuCourse);
             for (StudentCourse it : list) {
                 stuCourseWriter.write(it.toString() + "\n");

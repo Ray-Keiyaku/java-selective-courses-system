@@ -328,6 +328,7 @@ public class Users {
             String usrHome = System.getProperty("user.home");
             File teacher = new File(usrHome + "/.selective-courses/teacher.txt");
             if (!teacher.exists()) {
+                teacher.getParentFile().mkdirs();
                 teacher.createNewFile();
             }
             FileWriter teacherWriter = new FileWriter(teacher);
@@ -359,8 +360,12 @@ public class Users {
     // 学生文件输出
     public static void studentSave() {
         try {
-            File student = new File("~/.selective-courses/student.txt");
-            student.mkdirs();
+            String usrHome = System.getProperty("user.home");
+            File student = new File(usrHome + "/.selective-courses/student.txt");
+            if (!student.exists()) {
+                student.getParentFile().mkdirs();
+                student.createNewFile();
+            }
             FileWriter studentWriter = new FileWriter(student);
             for (Student it : studentUser) {
                 studentWriter.write(it.toString() + "\n");
