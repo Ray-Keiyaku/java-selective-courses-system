@@ -314,12 +314,13 @@ public class Users {
         try {
             String usrHome = System.getProperty("user.home");
             File teacher = new File(usrHome + "/.selective-courses/teacher.txt");
-            Scanner fileIn = new Scanner(teacher);
-            while (fileIn.hasNextLine()) {
-                Teacher tmp = createTeacher(fileIn);
-                teacherUser.add(tmp);
+            if (teacher.exists()) {
+                Scanner fileIn = new Scanner(teacher);
+                while (fileIn.hasNextLine()) {
+                    Teacher tmp = createTeacher(fileIn);
+                    teacherUser.add(tmp);
+                }
             }
-
         } catch (Exception e) {
             System.out.println("从文件读取教师列表时出现异常！" + e);
         }
@@ -349,12 +350,13 @@ public class Users {
         try {
             String usrHome = System.getProperty("user.home");
             File student = new File(usrHome + "/.selective-courses/student.txt");
-            Scanner fileIn = new Scanner(student);
-            while (fileIn.hasNextLine()) {
-                Student tmp = createStudent(fileIn);
-                studentUser.add(tmp);
+            if (student.exists()) {
+                Scanner fileIn = new Scanner(student);
+                while (fileIn.hasNextLine()) {
+                    Student tmp = createStudent(fileIn);
+                    studentUser.add(tmp);
+                }
             }
-
         } catch (Exception e) {
             System.out.println("从文件读取学生列表时出现异常！" + e);
         }

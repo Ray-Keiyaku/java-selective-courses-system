@@ -222,12 +222,14 @@ public class Courses {
         try {
             String usrHome = System.getProperty("user.home");
             File course = new File(usrHome + "/.selective-courses/course.txt");
-            Scanner fileIn = new Scanner(course);
-            while (fileIn.hasNextLine()) {
-                Course tmp = createCourse(fileIn);
-                list.add(tmp);
+            if (course.exists()) {
+                Scanner fileIn = new Scanner(course);
+                while (fileIn.hasNextLine()) {
+                    Course tmp = createCourse(fileIn);
+                    list.add(tmp);
+                }
+                fileIn.close();
             }
-            fileIn.close();
         } catch (Exception e) {
             System.out.println("从文件读取课程列表时出现异常！" + e);
         }

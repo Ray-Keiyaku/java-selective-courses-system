@@ -53,13 +53,15 @@ public class StudentCourses {
         try {
             String usrHome = System.getProperty("user.home");
             File stuCourse = new File(usrHome + "/.selective-courses/stuCourse.txt");
-            Scanner fileIn = new Scanner(stuCourse);
-            while (fileIn.hasNextLine()) {
-                int studentID = fileIn.nextInt();
-                int courseID = fileIn.nextInt();
-                list.add(new StudentCourse(studentID, courseID));
+            if (stuCourse.exists()) {
+                Scanner fileIn = new Scanner(stuCourse);
+                while (fileIn.hasNextLine()) {
+                    int studentID = fileIn.nextInt();
+                    int courseID = fileIn.nextInt();
+                    list.add(new StudentCourse(studentID, courseID));
+                }
+                fileIn.close();
             }
-            fileIn.close();
         } catch (Exception e) {
             System.out.println("从文件读取选课记录列表时出现异常！" + e);
         }
