@@ -61,6 +61,11 @@ public abstract class Course implements Comparable<Course> {
         this.studentNum++;
     }
 
+    // 当前课程学生人数+1
+    public void delStudentNum() {
+        this.studentNum--;
+    }
+
     // 当前课程学生人数=n
     public void addStudentNum(int n) {
         this.studentNum = n;

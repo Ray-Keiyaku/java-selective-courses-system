@@ -14,12 +14,9 @@ public class Courses {
 
     // 从流中读取课程信息并返回对象
     private static Course createCourse(Scanner input) {
-        int ID;
-        String name;
-        int teacherID;
+        int ID, teacherID, studentNum = 0, maxStudentNum, credit;
         boolean isElective;
-        int studentNum = 0;
-        int maxStudentNum, credit;
+        String name;
         Course ele;
         // 从标准输入流输入
         if (stdIn.equals(input)) {
@@ -27,8 +24,19 @@ public class Courses {
             ID = input.nextInt();
             System.out.println("请输入课程名：");
             name = input.next();
-            System.out.println("请输入任课教师工号：");
-            teacherID = input.nextInt();
+            while (true) {
+                System.out.println("请输入任课教师工号：");
+                teacherID = input.nextInt();
+                if (Users.findTeacher(teacherID) == null) {
+                    System.out.println("该教师不存在，是否重新输入？（y/n）");
+                    String yn = input.next();
+                    if (yn.equals("n")) {
+                        return null;
+                    }
+                } else {
+                    break;
+                }
+            }
             System.out.println("请输入课程是否为选修（true/false）：");
             isElective = input.nextBoolean();
             if (isElective) {
@@ -61,9 +69,11 @@ public class Courses {
     // 添加一节课
     private static void addCourse() {
         Course ele = createCourse(stdIn);
-        list.add(ele);
-        if (ele instanceof RequiredCourse) {
-            Users.allSelectRequiredCourse(ele.getCourseID());
+        if (ele != null) {
+            list.add(ele);
+            if (ele instanceof RequiredCourse) {
+                Users.allSelectRequiredCourse(ele.getCourseID());
+            }
         }
     }
 
@@ -84,6 +94,7 @@ public class Courses {
     private static void delCourse() {
         System.out.println("请输入课程编号：");
         int id = stdIn.nextInt();
+        StudentCourses.delAllRelationByCourse(id);
         list.remove(findCourse(id));
     }
 
@@ -163,7 +174,7 @@ public class Courses {
         }
     }
 
-    // 用教师姓名查找所授课信息并打印
+    // 用教师工号查找所授课信息并打印
     public static void showCourseByTeacher(int workID) {
         showCourseHeader();
         for (Course it : list) {
@@ -171,6 +182,16 @@ public class Courses {
                 System.out.println(it.show());
             }
         }
+    }
+
+    // 用教师工号查找所授课并删除
+    public static void delAllCourseByTeacher(int workID) {
+        for (Course it : list) {
+            if (it.getTeacherID() == workID) {
+                StudentCourses.delAllRelationByCourse(it.getCourseID());
+            }
+        }
+        list.removeIf(it -> it.getTeacherID() == workID);
     }
 
     // 用教师姓名查找所授课信息并打印学生列表

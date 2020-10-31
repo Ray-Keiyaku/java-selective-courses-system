@@ -211,6 +211,7 @@ public class Users {
             Users.showTeacher(workID);
             User tmp = Users.findTeacher(workID);
             if (tmp != null) {
+                Courses.delAllCourseByTeacher(workID);
                 teacherUser.remove(tmp);
                 System.out.println("教师删除成功！");
             }
@@ -229,6 +230,7 @@ public class Users {
             Users.showStudent(studentID);
             User tmp = Users.findStudent(studentID);
             if (tmp != null) {
+                StudentCourses.delAllRelationByStudent(studentID);
                 studentUser.remove(tmp);
                 System.out.println("学生删除成功！");
             }

@@ -46,6 +46,21 @@ public class StudentCourses {
         }
     }
 
+    // 用课程编号查找所有选课记录并删除
+    public static void delAllRelationByCourse(int courseID) {
+        list.removeIf(it -> it.getCourseID() == courseID);
+    }
+
+    // 用学号查找所有选课记录并删除
+    public static void delAllRelationByStudent(int studentID) {
+        list.removeIf(it -> it.getStudentID() == studentID);
+        for (StudentCourse it : list) {
+            if (it.getStudentID() == studentID) {
+                Courses.findCourse(it.getCourseID()).delStudentNum();
+            }
+        }
+    }
+
     // 打印该学生选课列表
     public static void showStuCourses(int studentID) {
         Courses.showCourseHeader();
